@@ -1,8 +1,5 @@
-Here’s a polished and engaging README template for your Node.js Express application:
 
----
-
-# Ollama Telegram Bot Connector 🌟
+# Ollama Telegram Bot Companion 🌟
 
 Effortlessly bridge the gap between a self-hosted **Llama 3.2 model** and **Telegram** with this powerful Node.js Express application.
 
