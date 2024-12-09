@@ -10,10 +10,10 @@ async function queryOllama(message) {
       stream: false,
     });
     const respData = response.data.response.toString();
-    return res.send(respData);
+    return respData;
   } catch (error) {
     console.error(error);
-    throw new Error("Ollama API error");
+    throw new Error(error);
   }
 }
 

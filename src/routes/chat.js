@@ -6,9 +6,9 @@ router.post("/", async (req, res) => {
   const { message } = req.body;
   try {
     const response = await queryOllama(message);
-    res.json(response);
+    res.send(response);
   } catch (error) {
-    res.status(500).json({ error: "Error connecting to Ollama Service" });
+    res.status(500).json({ error: error.message });
   }
 });
 
