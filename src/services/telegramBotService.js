@@ -21,6 +21,12 @@ bot.on("message", async (msg) => {
         "Welcome to Ollama Bot! Send me a message and I will translate it to Ollama language."
       );
       break;
+    case "/help":
+      bot.sendMessage(
+        chatId,
+        "Send me a message and I will translate it to Ollama language using the llama3.2 model with 1 billion parameters. I can make mistakes, double check important infos."
+      );
+      break;
     default:
       const response = await queryOllama(msg.text);
       bot.sendMessage(chatId, response);

@@ -1,18 +1,17 @@
-
 # Ollama Telegram Bot Companion 🌟
 
-Effortlessly bridge the gap between a self-hosted **Llama 3.2 model** and **Telegram** with this powerful Node.js Express application.
+Effortlessly bridge the gap between a self-hosted **Llama 3.2 model** and **Telegram** with this Node.js application.
 
-**Ollama Telegram Bot Connector** enables users to send HTTP requests to a local Ollama instance and interact with it through a user-friendly Telegram bot. Perfect for creating an AI companion, automating tasks, or experimenting with Llama models in a conversational interface.
+**Ollama Telegram Bot Companion** enables users to interact directly with a local Ollama instance via Telegram, using the Node Telegram Bot API. Perfect for creating an AI-powered conversational companion or experimenting with Llama models in a seamless and efficient way.
 
 ---
 
 ## ✨ Features
 
 - **AI-Powered Conversations**: Leverage the advanced capabilities of Llama 3.2 for rich, contextual chat interactions.
-- **Seamless Telegram Integration**: Connect your AI assistant to Telegram with the Node Telegram Bot API.
-- **Flexible Deployment**: Run the application locally or in a server environment.
-- **Simple Setup**: Get up and running quickly with an intuitive configuration process.
+- **Direct Telegram Integration**: No need for a web server—interact directly with Ollama through Telegram.
+- **PM2 Support**: Designed to run reliably in production using PM2.
+- **Simplified Setup**: Straightforward configuration and deployment.
 
 ---
 
@@ -21,8 +20,8 @@ Effortlessly bridge the gap between a self-hosted **Llama 3.2 model** and **Tele
 ### Prerequisites
 
 Before you start, ensure you have the following installed:
-
 - [Node.js](https://nodejs.org/) (v18 or higher)
+- [PM2](https://pm2.keymetrics.io/) (for process management)
 - [Ollama](https://ollama.com/) (self-hosted Llama 3.2 model)
 - [Telegram Bot Token](https://core.telegram.org/bots#creating-a-new-bot)
 
@@ -50,9 +49,17 @@ Before you start, ensure you have the following installed:
    TELEGRAM_BOT_TOKEN=your_telegram_bot_token
    ```
 
-4. **Start the Application**
+4. **Start with PM2**
+   Use PM2 to run the bot for improved reliability and monitoring:
+
    ```bash
-   npm start
+   pm2 start src/services/telegramBotService.js --name ai-telegram-bot
+   pm2 save
+   ```
+
+   To view logs:
+   ```bash
+   pm2 logs ai-telegram-bot
    ```
 
 ---
@@ -68,11 +75,9 @@ Before you start, ensure you have the following installed:
 
 ```
 📁 src/
-├── 📁 routes/
-│   └── 📄 chat.js          # Defines routes for handling chat requests
 ├── 📁 services/
-│   └── 📄 ollamaService.js # Handles HTTP requests to the local Ollama instance
-├── 📄 server.js            # Main Express server entry point
+│   ├── 📄 ollamaService.js   # Handles interactions with the local Ollama API
+│   └── 📄 telegramBotService.js # Telegram bot logic and API integration
 ```
 
 ---
@@ -92,8 +97,8 @@ Contributions are welcome! If you’d like to improve this project:
 ## 🛠️ Future Improvements
 
 - **Enhanced Error Handling**
-- **Support for Multiple Models**
-- **Advanced Configuration Options**
+- **Support for Advanced Ollama Features**
+- **Scalability Enhancements**
 
 ---
 
