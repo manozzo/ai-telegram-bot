@@ -1,10 +1,10 @@
 const axios = require("axios");
 
-const OLLAMA_API_URL = "http://localhost:11434/api/generate";
+const apiUrl = "http://localhost:11434/api/generate";
 
 async function queryOllama(message) {
   try {
-    const response = await axios.post(OLLAMA_API_URL, {
+    const response = await axios.post(apiUrl, {
       model: "llama3.2:1b",
       prompt: message,
       stream: false,
@@ -13,7 +13,7 @@ async function queryOllama(message) {
     return respData;
   } catch (error) {
     console.error(error);
-    throw new Error(error);
+    throw new Error("Failed to query Ollama");
   }
 }
 
