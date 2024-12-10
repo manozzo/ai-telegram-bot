@@ -28,7 +28,15 @@ bot.on("message", async (msg) => {
       );
       break;
     default:
-      const response = await queryOllama(msg.text);
-      bot.sendMessage(chatId, response);
+      bot.sendChatAction(chatId, "typing");
+      try {
+        const response = await queryOllama(msg.text);
+        bot.sendMessage(chatId, response);
+      } catch (error) {
+        bot.sendMessage(
+          chatId,
+          "Oops, something went wrong. Please try again."
+        );
+      }
   }
 });
