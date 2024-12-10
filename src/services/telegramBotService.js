@@ -1,4 +1,6 @@
+require("dotenv").config();
 const TelegramBot = require("node-telegram-bot-api");
+const { queryOllama } = require("./ollamaService");
 
 const token = process.env.TELEGRAM_BOT_TOKEN;
 
@@ -10,7 +12,17 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
   bot.sendMessage(chatId, resp);
 });
 
-bot.on("message", (msg) => {
+bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
-  bot.sendMessage(chatId, "Received your message");
+  switch (msg.text) {
+    case "/start":
+      bot.sendMessage(
+        chatId,
+        "Welcome to Ollama Bot! Send me a message and I will translate it to Ollama language."
+      );
+      break;
+    default:
+      const response = await queryOllama(msg.text);
+      bot.sendMessage(chatId, response);
+  }
 });
